@@ -15,6 +15,7 @@
 		311EFA341B68AA78005C2109 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 311EFA321B68AA78005C2109 /* LaunchScreen.xib */; };
 		311EFA401B68AA78005C2109 /* testTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 311EFA3F1B68AA78005C2109 /* testTests.m */; };
 		311EFA551B68DE30005C2109 /* KyoCinameSeatScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 311EFA541B68DE30005C2109 /* KyoCinameSeatScrollView.m */; };
+		31A098941B69F8AE0011B860 /* KyoRowIndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A098931B69F8AE0011B860 /* KyoRowIndexView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		311EFA3F1B68AA78005C2109 /* testTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testTests.m; sourceTree = "<group>"; };
 		311EFA531B68DE30005C2109 /* KyoCinameSeatScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KyoCinameSeatScrollView.h; sourceTree = "<group>"; };
 		311EFA541B68DE30005C2109 /* KyoCinameSeatScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KyoCinameSeatScrollView.m; sourceTree = "<group>"; };
+		31A098921B69F8AE0011B860 /* KyoRowIndexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KyoRowIndexView.h; sourceTree = "<group>"; };
+		31A098931B69F8AE0011B860 /* KyoRowIndexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KyoRowIndexView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,8 @@
 			children = (
 				311EFA531B68DE30005C2109 /* KyoCinameSeatScrollView.h */,
 				311EFA541B68DE30005C2109 /* KyoCinameSeatScrollView.m */,
+				31A098921B69F8AE0011B860 /* KyoRowIndexView.h */,
+				31A098931B69F8AE0011B860 /* KyoRowIndexView.m */,
 			);
 			path = KyoCinameSeatScrollView;
 			sourceTree = "<group>";
@@ -236,6 +241,7 @@
 				311EFA291B68AA78005C2109 /* AppDelegate.m in Sources */,
 				311EFA261B68AA78005C2109 /* main.m in Sources */,
 				311EFA551B68DE30005C2109 /* KyoCinameSeatScrollView.m in Sources */,
+				31A098941B69F8AE0011B860 /* KyoRowIndexView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

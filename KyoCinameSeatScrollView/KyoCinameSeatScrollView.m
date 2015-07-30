@@ -7,10 +7,16 @@
 //
 
 #import "KyoCinameSeatScrollView.h"
+#import "KyoRowIndexView.h"
+
+#define kRowIndexWith   16
+#define kRowIndexSpace  2
+#define kRowIndexViewDefaultColor   [[UIColor blackColor] colorWithAlphaComponent:0.7]
 
 @interface KyoCinameSeatScrollView()
 
 @property (strong, nonatomic) NSMutableDictionary *dictSeat;
+@property (strong, nonatomic) KyoRowIndexView *rowIndexView;
 
 - (void)btnSeatTouchIn:(UIButton *)btn;
 
@@ -22,12 +28,14 @@
 #pragma mark - CycLife
 
 - (void)drawRect:(CGRect)rect {
-    self.contentSize = CGSizeMake(self.seatLeft + self.column * self.seatSize.width + self.seatRight,
+    //计算并设置contentsize
+    self.contentSize = CGSizeMake(self.seatLeft + self.column * self.seatSize.width + self.seatRight + (self.showRowIndex ? kRowIndexWith + kRowIndexSpace * 2  : 0),
                                   self.seatTop + self.row * self.seatSize.height + self.seatBottom);
     
+    //画座位
     if (!self.dictSeat) self.dictSeat = [NSMutableDictionary dictionary];
     
-    CGFloat x = self.seatLeft;
+    CGFloat x = self.seatLeft + (self.showRowIndex ? kRowIndexSpace * 2 : 0);
     CGFloat y = self.seatTop;
     for (NSInteger row = 0; row < self.row; row++) {
         
@@ -59,9 +67,25 @@
         }
         
         y += self.seatSize.height;
-        x = self.seatLeft;
+        x = self.seatLeft + (self.showRowIndex ? kRowIndexSpace * 2 : 0);
         
         [self.dictSeat setObject:arraySeat forKey:@(row)];
+    }
+    
+    //画座位行数提示
+    if (!self.rowIndexView) {
+        self.rowIndexView = [[KyoRowIndexView alloc] init];
+        self.rowIndexView.backgroundColor = self.rowIndexViewColor ? : kRowIndexViewDefaultColor;
+        [self addSubview:self.rowIndexView];
+    }
+    if (self.showRowIndex) {
+        self.rowIndexView.row = self.row;
+        self.rowIndexView.width = kRowIndexWith;
+        self.rowIndexView.rowIndexViewColor = self.rowIndexViewColor;
+        self.rowIndexView.frame = CGRectMake(kRowIndexSpace, self.seatTop, kRowIndexWith, self.row * self.seatSize.height);
+        self.rowIndexView.hidden = NO;
+    } else {
+        self.rowIndexView.hidden = YES;
     }
 }
 

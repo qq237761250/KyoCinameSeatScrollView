@@ -47,6 +47,10 @@ IB_DESIGNABLE
 @property (strong, nonatomic) IBInspectable UIImage *imgSeatLoversRightHadBuy;
 @property (strong, nonatomic) IBInspectable UIImage *imgSeatLoversRightSelected;
 
+@property (assign, nonatomic) IBInspectable BOOL showCenterLine;
+@property (assign, nonatomic) IBInspectable BOOL showRowIndex;
+@property (strong, nonatomic) IBInspectable UIColor *rowIndexViewColor;
+
 @end
 
 @protocol KyoCinameSeatScrollViewDelegate <NSObject>

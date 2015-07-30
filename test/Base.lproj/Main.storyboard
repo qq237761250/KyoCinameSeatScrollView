@@ -17,8 +17,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uxm-uK-Os7" customClass="KyoCinameSeatScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="3ae-Zy-DAz"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="row">
                                         <integer key="value" value="20"/>
@@ -44,6 +47,7 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="imgSeatNormal" value="com_icon_seat_empty"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="imgSeatHadBuy" value="com_icon_seat_hadBuy"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="imgSeatSelected" value="com_icon_seat_selected"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showRowIndex" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="kyoCinameSeatScrollViewDelegate" destination="vXZ-lx-hvc" id="S8A-GX-k3f"/>
@@ -54,7 +58,6 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="uxm-uK-Os7" secondAttribute="trailing" id="1Rr-af-9Zw"/>
                             <constraint firstItem="uxm-uK-Os7" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="gA3-PT-ucw"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="uxm-uK-Os7" secondAttribute="bottom" id="gd4-4j-7zO"/>
                             <constraint firstItem="uxm-uK-Os7" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="r7R-2l-hNx"/>
                         </constraints>
                     </view>
