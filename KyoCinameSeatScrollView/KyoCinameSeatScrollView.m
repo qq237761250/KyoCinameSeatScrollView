@@ -8,15 +8,18 @@
 
 #import "KyoCinameSeatScrollView.h"
 #import "KyoRowIndexView.h"
+#import "KyoCenterLineView.h"
 
 #define kRowIndexWith   16
 #define kRowIndexSpace  2
 #define kRowIndexViewDefaultColor   [[UIColor blackColor] colorWithAlphaComponent:0.7]
+#define kCenterLineViewTail 6
 
 @interface KyoCinameSeatScrollView()
 
 @property (strong, nonatomic) NSMutableDictionary *dictSeat;
 @property (strong, nonatomic) KyoRowIndexView *rowIndexView;
+@property (strong, nonatomic) KyoCenterLineView *centerLineView;
 
 - (void)btnSeatTouchIn:(UIButton *)btn;
 
@@ -29,7 +32,7 @@
 
 - (void)drawRect:(CGRect)rect {
     //计算并设置contentsize
-    self.contentSize = CGSizeMake(self.seatLeft + self.column * self.seatSize.width + self.seatRight + (self.showRowIndex ? kRowIndexWith + kRowIndexSpace * 2  : 0),
+    self.contentSize = CGSizeMake(self.seatLeft + self.column * self.seatSize.width + self.seatRight,
                                   self.seatTop + self.row * self.seatSize.height + self.seatBottom);
     
     //画座位
@@ -86,6 +89,19 @@
         self.rowIndexView.hidden = NO;
     } else {
         self.rowIndexView.hidden = YES;
+    }
+    
+    //画中线
+    if (!self.centerLineView) {
+        self.centerLineView = [[KyoCenterLineView alloc] init];
+        self.centerLineView.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.centerLineView];
+    }
+    if (self.showCenterLine) {
+        self.centerLineView.frame = CGRectMake(self.seatLeft + self.column * self.seatSize.width / 2, self.seatTop - kCenterLineViewTail, 1, self.row * self.seatSize.height + kCenterLineViewTail * 2);
+        self.centerLineView.hidden = NO;
+    } else {
+        self.centerLineView.hidden = YES;
     }
 }
 

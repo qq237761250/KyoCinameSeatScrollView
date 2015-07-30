@@ -16,6 +16,7 @@
 		311EFA401B68AA78005C2109 /* testTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 311EFA3F1B68AA78005C2109 /* testTests.m */; };
 		311EFA551B68DE30005C2109 /* KyoCinameSeatScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 311EFA541B68DE30005C2109 /* KyoCinameSeatScrollView.m */; };
 		31A098941B69F8AE0011B860 /* KyoRowIndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A098931B69F8AE0011B860 /* KyoRowIndexView.m */; };
+		31A098971B6A07C70011B860 /* KyoCenterLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A098961B6A07C70011B860 /* KyoCenterLineView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		311EFA541B68DE30005C2109 /* KyoCinameSeatScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KyoCinameSeatScrollView.m; sourceTree = "<group>"; };
 		31A098921B69F8AE0011B860 /* KyoRowIndexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KyoRowIndexView.h; sourceTree = "<group>"; };
 		31A098931B69F8AE0011B860 /* KyoRowIndexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KyoRowIndexView.m; sourceTree = "<group>"; };
+		31A098951B6A07C70011B860 /* KyoCenterLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KyoCenterLineView.h; sourceTree = "<group>"; };
+		31A098961B6A07C70011B860 /* KyoCenterLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KyoCenterLineView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +136,8 @@
 				311EFA541B68DE30005C2109 /* KyoCinameSeatScrollView.m */,
 				31A098921B69F8AE0011B860 /* KyoRowIndexView.h */,
 				31A098931B69F8AE0011B860 /* KyoRowIndexView.m */,
+				31A098951B6A07C70011B860 /* KyoCenterLineView.h */,
+				31A098961B6A07C70011B860 /* KyoCenterLineView.m */,
 			);
 			path = KyoCinameSeatScrollView;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 				311EFA2C1B68AA78005C2109 /* ViewController.m in Sources */,
 				311EFA291B68AA78005C2109 /* AppDelegate.m in Sources */,
 				311EFA261B68AA78005C2109 /* main.m in Sources */,
+				31A098971B6A07C70011B860 /* KyoCenterLineView.m in Sources */,
 				311EFA551B68DE30005C2109 /* KyoCinameSeatScrollView.m in Sources */,
 				31A098941B69F8AE0011B860 /* KyoRowIndexView.m in Sources */,
 			);
