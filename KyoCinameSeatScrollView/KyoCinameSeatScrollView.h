@@ -49,7 +49,10 @@ IB_DESIGNABLE
 
 @property (assign, nonatomic) IBInspectable BOOL showCenterLine;
 @property (assign, nonatomic) IBInspectable BOOL showRowIndex;
+@property (assign, nonatomic) IBInspectable BOOL rowIndexStick;  /**< 是否让showIndexView粘着左边 */
 @property (strong, nonatomic) IBInspectable UIColor *rowIndexViewColor;
+
+- (void)displaySeatCenter;  //显示中心位置
 
 @end
 

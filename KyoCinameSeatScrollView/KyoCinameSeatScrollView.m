@@ -23,12 +23,46 @@
 
 - (void)btnSeatTouchIn:(UIButton *)btn;
 
+- (void)addObserver;
+- (void)removeObserver;
+
 @end
 
 @implementation KyoCinameSeatScrollView
 
 #pragma mark --------------------
 #pragma mark - CycLife
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        [self addObserver];
+    }
+    
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self addObserver];
+    }
+    
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self addObserver];
+    }
+    
+    return self;
+}
+
+- (void)dealloc {
+    [self removeObserver];
+}
 
 - (void)drawRect:(CGRect)rect {
     //计算并设置contentsize
@@ -82,10 +116,11 @@
         [self addSubview:self.rowIndexView];
     }
     if (self.showRowIndex) {
+        [self bringSubviewToFront:self.rowIndexView];
         self.rowIndexView.row = self.row;
         self.rowIndexView.width = kRowIndexWith;
         self.rowIndexView.rowIndexViewColor = self.rowIndexViewColor;
-        self.rowIndexView.frame = CGRectMake(kRowIndexSpace, self.seatTop, kRowIndexWith, self.row * self.seatSize.height);
+        self.rowIndexView.frame = CGRectMake(kRowIndexSpace + (self.rowIndexStick ? self.contentOffset.x : 0), self.seatTop, kRowIndexWith, self.row * self.seatSize.height);
         self.rowIndexView.hidden = NO;
     } else {
         self.rowIndexView.hidden = YES;
@@ -98,6 +133,7 @@
         [self addSubview:self.centerLineView];
     }
     if (self.showCenterLine) {
+        [self bringSubviewToFront:self.centerLineView];
         self.centerLineView.frame = CGRectMake(self.seatLeft + self.column * self.seatSize.width / 2, self.seatTop - kCenterLineViewTail, 1, self.row * self.seatSize.height + kCenterLineViewTail * 2);
         if (self.row > 0 && self.column > 0) {
             self.centerLineView.hidden = NO;
@@ -165,5 +201,32 @@
         return self.imgSeatNormal;
     }
 }
+
+- (void)addObserver {
+    [self addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+}
+
+- (void)removeObserver {
+    [self removeObserver:self forKeyPath:@"contentOffset"];
+}
+
+//显示中心位置
+- (void)displaySeatCenter {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        CGFloat offerX = self.contentSize.width / 2  - self.bounds.size.width / 2;
+        offerX += (self.seatLeft - self.seatRight) / 2;
+        [self setContentOffset:CGPointMake(offerX, 0) animated:YES];
+    });
+}
+
+#pragma mark --------------------
+#pragma mark - KVC/KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (self.rowIndexStick && self.rowIndexView && self.row > 0 && self.column > 0) {
+        self.rowIndexView.frame = CGRectMake(kRowIndexSpace + (self.rowIndexStick ? self.contentOffset.x : 0), self.seatTop, kRowIndexWith, self.row * self.seatSize.height);
+    }
+}
+
 
 @end

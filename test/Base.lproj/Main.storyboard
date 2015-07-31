@@ -49,6 +49,7 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="imgSeatSelected" value="com_icon_seat_selected"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="showRowIndex" value="YES"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="showCenterLine" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="rowIndexStick" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="kyoCinameSeatScrollViewDelegate" destination="vXZ-lx-hvc" id="S8A-GX-k3f"/>
