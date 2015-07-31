@@ -99,9 +99,25 @@
     }
     if (self.showCenterLine) {
         self.centerLineView.frame = CGRectMake(self.seatLeft + self.column * self.seatSize.width / 2, self.seatTop - kCenterLineViewTail, 1, self.row * self.seatSize.height + kCenterLineViewTail * 2);
-        self.centerLineView.hidden = NO;
+        if (self.row > 0 && self.column > 0) {
+            self.centerLineView.hidden = NO;
+        } else {
+            self.centerLineView.hidden = YES;
+        }
     } else {
         self.centerLineView.hidden = YES;
+    }
+}
+
+- (void)setNeedsDisplay {
+    [super setNeedsDisplay];
+    
+    if (self.rowIndexView) {
+        [self.rowIndexView setNeedsDisplay];
+    }
+    
+    if (self.centerLineView) {
+        [self.centerLineView setNeedsDisplay];
     }
 }
 
