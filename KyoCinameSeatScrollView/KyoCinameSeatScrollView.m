@@ -68,8 +68,8 @@
 
 - (void)drawRect:(CGRect)rect {
     //计算并设置contentsize
-    self.contentSize = CGSizeMake(self.seatLeft + self.column * self.seatSize.width + self.seatRight,
-                                  self.seatTop + self.row * self.seatSize.height + self.seatBottom);
+    self.contentSize = CGSizeMake((self.seatLeft + self.column * self.seatSize.width + self.seatRight) * self.zoomScale,
+                                  (self.seatTop + self.row * self.seatSize.height + self.seatBottom) * self.zoomScale);
     
     if (!self.contentView) {
         self.contentView = [[UIView alloc] init];
@@ -130,7 +130,7 @@
         self.rowIndexView.row = self.row;
         self.rowIndexView.width = kRowIndexWith;
         self.rowIndexView.rowIndexViewColor = self.rowIndexViewColor;
-        self.rowIndexView.frame = CGRectMake(kRowIndexSpace + (self.rowIndexStick ? self.contentOffset.x : 0), self.seatTop, kRowIndexWith, self.row * self.seatSize.height);
+        self.rowIndexView.frame = CGRectMake((kRowIndexSpace + (self.rowIndexStick ? self.contentOffset.x : 0)) / self.zoomScale, self.seatTop, kRowIndexWith, self.row * self.seatSize.height);
         self.rowIndexView.hidden = NO;
     } else {
         self.rowIndexView.hidden = YES;
