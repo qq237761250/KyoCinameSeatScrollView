@@ -10,16 +10,18 @@
 #import "KyoRowIndexView.h"
 #import "KyoCenterLineView.h"
 
-#define kRowIndexWith   16
-#define kRowIndexSpace  2
+#define kRowIndexWith   16.0
+#define kRowIndexSpace  2.0
 #define kRowIndexViewDefaultColor   [[UIColor blackColor] colorWithAlphaComponent:0.7]
-#define kCenterLineViewTail 6
+#define kCenterLineViewTail 6.0
 
 @interface KyoCinameSeatScrollView()
 
-@property (strong, nonatomic) NSMutableDictionary *dictSeat;
+@property (strong, nonatomic) UIView *contentView;
 @property (strong, nonatomic) KyoRowIndexView *rowIndexView;
 @property (strong, nonatomic) KyoCenterLineView *centerLineView;
+
+@property (strong, nonatomic) NSMutableDictionary *dictSeat;
 
 - (void)btnSeatTouchIn:(UIButton *)btn;
 
@@ -69,6 +71,14 @@
     self.contentSize = CGSizeMake(self.seatLeft + self.column * self.seatSize.width + self.seatRight,
                                   self.seatTop + self.row * self.seatSize.height + self.seatBottom);
     
+    if (!self.contentView) {
+        self.contentView = [[UIView alloc] init];
+        self.contentView.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.contentView];
+    } else {
+        self.contentView.frame = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
+    }
+    
     //画座位
     if (!self.dictSeat) self.dictSeat = [NSMutableDictionary dictionary];
     
@@ -85,7 +95,7 @@
                 btnSeat = [UIButton buttonWithType:UIButtonTypeCustom];
                 btnSeat.tag = row;  //tag纪录行数
                 [btnSeat addTarget:self action:@selector(btnSeatTouchIn:) forControlEvents:UIControlEventTouchUpInside];
-                [self addSubview:btnSeat];
+                [self.contentView addSubview:btnSeat];
                 [arraySeat addObject:btnSeat];
             } else {
                 btnSeat = arraySeat[column];
@@ -113,10 +123,10 @@
     if (!self.rowIndexView) {
         self.rowIndexView = [[KyoRowIndexView alloc] init];
         self.rowIndexView.backgroundColor = self.rowIndexViewColor ? : kRowIndexViewDefaultColor;
-        [self addSubview:self.rowIndexView];
+        [self.contentView addSubview:self.rowIndexView];
     }
     if (self.showRowIndex) {
-        [self bringSubviewToFront:self.rowIndexView];
+        [self.contentView bringSubviewToFront:self.rowIndexView];
         self.rowIndexView.row = self.row;
         self.rowIndexView.width = kRowIndexWith;
         self.rowIndexView.rowIndexViewColor = self.rowIndexViewColor;
@@ -130,10 +140,10 @@
     if (!self.centerLineView) {
         self.centerLineView = [[KyoCenterLineView alloc] init];
         self.centerLineView.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.centerLineView];
+        [self.contentView addSubview:self.centerLineView];
     }
     if (self.showCenterLine) {
-        [self bringSubviewToFront:self.centerLineView];
+        [self.contentView bringSubviewToFront:self.centerLineView];
         self.centerLineView.frame = CGRectMake(self.seatLeft + self.column * self.seatSize.width / 2, self.seatTop - kCenterLineViewTail, 1, self.row * self.seatSize.height + kCenterLineViewTail * 2);
         if (self.row > 0 && self.column > 0) {
             self.centerLineView.hidden = NO;
@@ -219,12 +229,17 @@
     });
 }
 
+//返回缩小放大的view
+- (UIView *)zoomView {
+    return self.contentView;
+}
+
 #pragma mark --------------------
 #pragma mark - KVC/KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (self.rowIndexStick && self.rowIndexView && self.row > 0 && self.column > 0) {
-        self.rowIndexView.frame = CGRectMake(kRowIndexSpace + (self.rowIndexStick ? self.contentOffset.x : 0), self.seatTop, kRowIndexWith, self.row * self.seatSize.height);
+        self.rowIndexView.frame = CGRectMake((kRowIndexSpace + (self.rowIndexStick ? self.contentOffset.x : 0)) / self.zoomScale, self.seatTop, kRowIndexWith, self.row * self.seatSize.height);
     }
 }
 
