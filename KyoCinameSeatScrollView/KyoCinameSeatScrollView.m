@@ -17,6 +17,8 @@
 
 @interface KyoCinameSeatScrollView()
 
+@property (weak, nonatomic) id scrollViewDelegate;  //用于存储delegate，防止野指针
+
 @property (strong, nonatomic) UIView *contentView;
 @property (strong, nonatomic) KyoRowIndexView *rowIndexView;
 @property (strong, nonatomic) KyoCenterLineView *centerLineView;
@@ -168,6 +170,14 @@
 }
 
 #pragma mark --------------------
+#pragma mark - Settings, Gettings
+
+- (void)setDelegate:(id<UIScrollViewDelegate>)delegate {
+    [super setDelegate:delegate];
+    self.scrollViewDelegate = delegate;
+}
+
+#pragma mark --------------------
 #pragma mark - Events
 
 - (void)btnSeatTouchIn:(UIButton *)btn {
@@ -238,8 +248,9 @@
 #pragma mark - KVC/KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    CGFloat zoomScale = self.scrollViewDelegate ? self.zoomScale : 1;   //判断一下是否为空，防止直接调用self.zoomSalce导致的野指针(delegate为野指针)
     if (self.rowIndexStick && self.rowIndexView && self.row > 0 && self.column > 0) {
-        self.rowIndexView.frame = CGRectMake((kRowIndexSpace + (self.rowIndexStick ? self.contentOffset.x : 0)) / self.zoomScale, self.seatTop, kRowIndexWith, self.row * self.seatSize.height);
+        self.rowIndexView.frame = CGRectMake((kRowIndexSpace + (self.rowIndexStick ? self.contentOffset.x : 0)) / zoomScale, self.seatTop, kRowIndexWith, self.row * self.seatSize.height);
     }
 }
 
