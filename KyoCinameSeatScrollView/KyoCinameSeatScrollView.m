@@ -240,8 +240,13 @@
 }
 
 //返回缩小放大的view
-- (UIView *)zoomView {
+- (UIView *)getZoomView {
     return self.contentView;
+}
+
+//返回左边现实row的视图
+- (UIView *)getRowIndexView {
+    return self.rowIndexView;
 }
 
 #pragma mark --------------------

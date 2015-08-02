@@ -53,7 +53,8 @@ IB_DESIGNABLE
 @property (strong, nonatomic) IBInspectable UIColor *rowIndexViewColor;
 
 - (void)displaySeatCenter;  //显示中心位置
-- (UIView *)zoomView;   //返回缩小放大的view
+- (UIView *)getZoomView;   //返回缩小放大的view
+- (UIView *)getRowIndexView;   //返回左边现实row的视图
 
 @end
 
