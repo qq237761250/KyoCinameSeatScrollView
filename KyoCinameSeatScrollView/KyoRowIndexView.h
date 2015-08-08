@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KyoCinameSeatScrollView.h"
 
 @interface KyoRowIndexView : UIView
 
 @property (nonatomic, assign) NSUInteger row;
 @property (assign, nonatomic) CGFloat width;
 @property (weak, nonatomic) UIColor *rowIndexViewColor;
+@property (assign, nonatomic) KyoCinameSeatRowIndexType rowIndexType;
 
 @end
