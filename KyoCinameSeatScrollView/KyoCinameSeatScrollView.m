@@ -236,7 +236,11 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         CGFloat offerX = self.contentSize.width / 2  - self.bounds.size.width / 2;
         offerX += (self.seatLeft - self.seatRight) / 2;
-        [self setContentOffset:CGPointMake(offerX, 0) animated:YES];
+        if (offerX < 0 && self.contentInset.left < fabs(offerX)) {
+            self.contentInset = UIEdgeInsetsMake(self.contentInset.top, fabs(offerX), self.contentInset.bottom, self.contentInset.right);
+        } else {
+            [self setContentOffset:CGPointMake(offerX, 0) animated:YES];
+        }
     });
 }
 
