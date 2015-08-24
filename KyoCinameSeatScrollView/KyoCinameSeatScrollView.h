@@ -21,6 +21,11 @@ typedef enum {
     KyoCinameSeatStateLoversRightSelected = 9 //情侣右已选择
 } KyoCinameSeatState;   //座位状态
 
+typedef enum : NSInteger {
+    KyoCinameSeatRowIndexTypeNumber = 0,    //默认，显示数字
+    KyoCinameSeatRowIndexTypeLetter = 1,    //显示字母
+}KyoCinameSeatRowIndexType;
+
 @protocol KyoCinameSeatScrollViewDelegate;
 
 IB_DESIGNABLE
@@ -51,6 +56,7 @@ IB_DESIGNABLE
 @property (assign, nonatomic) IBInspectable BOOL showRowIndex;
 @property (assign, nonatomic) IBInspectable BOOL rowIndexStick;  /**< 是否让showIndexView粘着左边 */
 @property (strong, nonatomic) IBInspectable UIColor *rowIndexViewColor;
+@property (assign, nonatomic) IBInspectable NSInteger rowIndexType;
 
 - (void)displaySeatCenter;  //显示中心位置
 - (UIView *)getZoomView;   //返回缩小放大的view

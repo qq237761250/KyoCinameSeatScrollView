@@ -133,6 +133,7 @@
         self.rowIndexView.width = kRowIndexWith;
         self.rowIndexView.rowIndexViewColor = self.rowIndexViewColor;
         self.rowIndexView.frame = CGRectMake((kRowIndexSpace + (self.rowIndexStick ? self.contentOffset.x : 0)) / self.zoomScale, self.seatTop, kRowIndexWith, self.row * self.seatSize.height);
+        self.rowIndexView.rowIndexType = self.rowIndexType;
         self.rowIndexView.hidden = NO;
     } else {
         self.rowIndexView.hidden = YES;
@@ -146,7 +147,12 @@
     }
     if (self.showCenterLine) {
         [self.contentView bringSubviewToFront:self.centerLineView];
-        self.centerLineView.frame = CGRectMake(self.seatLeft + self.column * self.seatSize.width / 2, self.seatTop - kCenterLineViewTail, 1, self.row * self.seatSize.height + kCenterLineViewTail * 2);
+        if (self.showRowIndex) {
+            self.centerLineView.frame = CGRectMake((self.seatLeft + self.column * self.seatSize.width + self.seatRight) / 2 + kRowIndexSpace * 2, self.seatTop - kCenterLineViewTail, 1, self.row * self.seatSize.height + kCenterLineViewTail * 2);
+        } else {
+            self.centerLineView.frame = CGRectMake((self.seatLeft + self.column * self.seatSize.width + self.seatRight) / 2, self.seatTop - kCenterLineViewTail, 1, self.row * self.seatSize.height + kCenterLineViewTail * 2);
+        }
+        
         if (self.row > 0 && self.column > 0) {
             self.centerLineView.hidden = NO;
         } else {
@@ -235,7 +241,14 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         CGFloat offerX = self.contentSize.width / 2  - self.bounds.size.width / 2;
         offerX += (self.seatLeft - self.seatRight) / 2;
-        [self setContentOffset:CGPointMake(offerX, 0) animated:YES];
+        if (self.showRowIndex) {
+            offerX += kRowIndexSpace * 2;
+        }
+        if (offerX < 0 && self.contentInset.left < fabs(offerX)) {
+            self.contentInset = UIEdgeInsetsMake(self.contentInset.top, fabs(offerX), self.contentInset.bottom, self.contentInset.right);
+        } else {
+            [self setContentOffset:CGPointMake(offerX, 0) animated:YES];
+        }
     });
 }
 

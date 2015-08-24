@@ -41,12 +41,13 @@
         NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithObject:(__bridge id)style forKey:(id)kCTParagraphStyleAttributeName];
         
         for (NSInteger i = 0; i < self.row; i++) {
-            NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld",(long)(i + 1)]];
-            [string addAttribute:(id)kCTFontAttributeName value:(__bridge id)font range:NSMakeRange(0, [string length])];
-            [string addAttribute:(id)kCTForegroundColorAttributeName value:(id)kKyoRowIndexViewColor.CGColor range:NSMakeRange(0, string.length)];
-            [string addAttributes:attributes range:NSMakeRange(0, [string length])];
+            NSString *string = self.rowIndexType == KyoCinameSeatRowIndexTypeNumber ? [NSString stringWithFormat:@"%ld",(long)(i + 1)] : [NSString stringWithFormat:@"%C", (unichar)(i + 65)];
+            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+            [attributedString addAttribute:(id)kCTFontAttributeName value:(__bridge id)font range:NSMakeRange(0, [attributedString length])];
+            [attributedString addAttribute:(id)kCTForegroundColorAttributeName value:(id)kKyoRowIndexViewColor.CGColor range:NSMakeRange(0, attributedString.length)];
+            [attributedString addAttributes:attributes range:NSMakeRange(0, [attributedString length])];
             
-            CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string);
+            CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attributedString);
             CGMutablePathRef path = CGPathCreateMutable();
             CGPathAddRect(path, NULL, CGRectMake(0, self.bounds.size.height - self.bounds.size.height / self.row * (i + 1) - (self.bounds.size.height / self.row - kKyoRowIndexViewFontSize) / 4,  self.bounds.size.width, self.bounds.size.height / self.row));
             CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
