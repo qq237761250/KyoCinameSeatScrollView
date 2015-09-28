@@ -134,6 +134,7 @@
         self.rowIndexView.rowIndexViewColor = self.rowIndexViewColor;
         self.rowIndexView.frame = CGRectMake((kRowIndexSpace + (self.rowIndexStick ? self.contentOffset.x : 0)) / self.zoomScale, self.seatTop, kRowIndexWith, self.row * self.seatSize.height);
         self.rowIndexView.rowIndexType = self.rowIndexType;
+        self.rowIndexView.arrayRowIndex = self.arrayRowIndex;
         self.rowIndexView.hidden = NO;
     } else {
         self.rowIndexView.hidden = YES;

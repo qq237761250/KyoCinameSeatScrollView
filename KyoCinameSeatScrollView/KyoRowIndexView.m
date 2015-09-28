@@ -42,6 +42,9 @@
         
         for (NSInteger i = 0; i < self.row; i++) {
             NSString *string = self.rowIndexType == KyoCinameSeatRowIndexTypeNumber ? [NSString stringWithFormat:@"%ld",(long)(i + 1)] : [NSString stringWithFormat:@"%C", (unichar)(i + 65)];
+            if (self.arrayRowIndex && self.arrayRowIndex.count > i) {
+                string = self.arrayRowIndex[i];
+            }
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
             [attributedString addAttribute:(id)kCTFontAttributeName value:(__bridge id)font range:NSMakeRange(0, [attributedString length])];
             [attributedString addAttribute:(id)kCTForegroundColorAttributeName value:(id)kKyoRowIndexViewColor.CGColor range:NSMakeRange(0, attributedString.length)];

@@ -15,5 +15,7 @@
 @property (assign, nonatomic) CGFloat width;
 @property (weak, nonatomic) UIColor *rowIndexViewColor;
 @property (assign, nonatomic) KyoCinameSeatRowIndexType rowIndexType;
+@property (strong, nonatomic) NSArray *arrayRowIndex; //座位号左边行号提示（用它则忽略rowindextype）
+
 
 @end
