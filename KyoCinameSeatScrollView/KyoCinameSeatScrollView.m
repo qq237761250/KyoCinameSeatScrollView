@@ -230,11 +230,15 @@
 }
 
 - (void)addObserver {
-    [self addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    if ([UIApplication sharedApplication].delegate) {
+        [self addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    }
 }
 
 - (void)removeObserver {
-    [self removeObserver:self forKeyPath:@"contentOffset"];
+    if ([UIApplication sharedApplication].delegate) {
+        [self removeObserver:self forKeyPath:@"contentOffset"];
+    }
 }
 
 //显示中心位置
